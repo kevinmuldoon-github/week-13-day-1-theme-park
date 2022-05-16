@@ -9,7 +9,7 @@ public class TobaccoStall extends Stall implements ISecurity {
         super(name, rating, ownerName, parkingSpot);
     }
 
-    @Override
+
     public boolean isAllowedTo(Visitor visitor) {
         boolean status =  true;
 

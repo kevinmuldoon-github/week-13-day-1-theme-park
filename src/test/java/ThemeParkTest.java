@@ -9,6 +9,8 @@ import stalls.ParkingSpot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
@@ -22,16 +24,19 @@ public class ThemeParkTest {
 
     private ThemePark themePark;
 
+    private HashMap reviews;
+
 
     @Before
     public void before(){
-        visitor1 = new Visitor(14, 1.2, 40.0);
-        visitor2 = new Visitor(18, 1.2, 40.0);
+        visitor1 = new Visitor(14, 140, 40.0);
+        visitor2 = new Visitor(18, 160, 40.0);
         rollerCoaster = new RollerCoaster("Blue Ridge", 10);
         candyflossStall = new CandyflossStall("Candy Land", 4, "Harry Belafonte", ParkingSpot.A1);
         dodgems = new Dodgems("Bumper Cars", 5);
         iceCreamStall = new IceCreamStall("Dream Cones", 4, "Vanilla Ice", ParkingSpot.A4);
         themePark = new ThemePark();
+        reviews = new HashMap();
     }
 
     @Test
@@ -59,6 +64,21 @@ public class ThemeParkTest {
         themePark.visit(visitor2, rollerCoaster);
         assertEquals(2, rollerCoaster.getVisitCount());
         assertEquals(Arrays.asList(rollerCoaster, dodgems), visitor1.getVisitedAttractions());
+    }
 
+    @Test
+    public void canBuildHashmap(){
+        themePark.addItem(rollerCoaster);
+        reviews.put("Blue Ridge", 10);
+        assertEquals(reviews, themePark.getReviews());
+    }
+
+    @Test
+    public void isVisitorAllowed(){
+        themePark.addItem(rollerCoaster);
+        themePark.addItem(candyflossStall);
+        themePark.addItem(dodgems);
+        themePark.addItem(iceCreamStall);
+        assertEquals(Arrays.asList(candyflossStall, dodgems,iceCreamStall), themePark.getAllAllowedFor(visitor1));
     }
 }
