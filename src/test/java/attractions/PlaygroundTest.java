@@ -35,6 +35,6 @@ public class PlaygroundTest {
     @Test
     public void checkAllowedTo(){
         assertEquals(false,playground.isAllowedTo(visitor1));
-        assertEquals(false,playground.isAllowedTo(visitor2));
+        assertEquals(true,playground.isAllowedTo(visitor2));
     }
 }
