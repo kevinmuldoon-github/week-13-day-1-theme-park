@@ -45,13 +45,16 @@ public class ThemePark {
     }
 
     public ArrayList<IReviewed> getAllAllowedFor(Visitor visitor){
-    ArrayList allowed = new ArrayList();
+    ArrayList<IReviewed> allowed = new ArrayList<>(); // new empty array to store allowed attractions and stalls
 
-    for (IReviewed item: items) {
+    for (IReviewed item: items) { // loop through items
 
-//        if (item. {
-//            allowed.add(item);
-//        } // end if
+        if (item instanceof ISecurity) { // Does the item implement ISecurity?
+            if (((ISecurity) item).isAllowedTo(visitor)){ // If visitor is allowed on attraction/stall
+                allowed.add(item); // add item to allowed list
+            } // end if
+
+        } // end if
     }
         return allowed;
     }
